@@ -1,0 +1,6 @@
+E:\Proyectos\APIS\NetCore\CleanArchitecture\ECOM.Template.API\ECOM.Template.API\obj\Debug\netcoreapp3.1\ECOM.Template.API.csproj.AssemblyReference.cache
+E:\Proyectos\APIS\NetCore\CleanArchitecture\ECOM.Template.API\ECOM.Template.API\obj\Debug\netcoreapp3.1\ECOM.Template.API.GeneratedMSBuildEditorConfig.editorconfig
+E:\Proyectos\APIS\NetCore\CleanArchitecture\ECOM.Template.API\ECOM.Template.API\obj\Debug\netcoreapp3.1\ECOM.Template.API.AssemblyInfoInputs.cache
+E:\Proyectos\APIS\NetCore\CleanArchitecture\ECOM.Template.API\ECOM.Template.API\obj\Debug\netcoreapp3.1\ECOM.Template.API.AssemblyInfo.cs
+E:\Proyectos\APIS\NetCore\CleanArchitecture\ECOM.Template.API\ECOM.Template.API\obj\Debug\netcoreapp3.1\ECOM.Template.API.csproj.CoreCompileInputs.cache
+E:\Proyectos\APIS\NetCore\CleanArchitecture\ECOM.Template.API\ECOM.Template.API\obj\Debug\netcoreapp3.1\ECOM.Template.API.MvcApplicationPartsAssemblyInfo.cache

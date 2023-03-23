@@ -1,0 +1,72 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v6.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v6.0": [
+      "ECOM.Utils.Nuget >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\admin\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\ARA\\Proyectos\\Apoyo\\AARCO\\API\\ECOM.Template.API\\ECOM.Template.Services\\ECOM.Template.Services.csproj",
+      "projectName": "ECOM.Template.Services",
+      "projectPath": "C:\\ARA\\Proyectos\\Apoyo\\AARCO\\API\\ECOM.Template.API\\ECOM.Template.Services\\ECOM.Template.Services.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "C:\\ARA\\Proyectos\\Apoyo\\AARCO\\API\\ECOM.Template.API\\ECOM.Template.Services\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net60"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net60": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net60": {
+        "dependencies": {
+          "ECOM.Utils.Nuget": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          }
+        }
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "No se encuentra el paquete ECOM.Utils.Nuget. No existe ningún paquete con este id. en los orígenes: Microsoft Visual Studio Offline Packages, nuget.org",
+      "libraryId": "ECOM.Utils.Nuget",
+      "targetGraphs": [
+        ".NETFramework,Version=v6.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AutosBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Descripcion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescripcionId" Type="varchar(max)" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdModeloSubMarca" Type="int" Nullable="false" />
+          <Property Name="IdSubMarca" Type="int" Nullable="false" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AutosBD.dbo.ListaDeAutos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ListaDeAutos">
+          <Key>
+            <PropertyRef Name="Marca" />
+            <PropertyRef Name="Submarca" />
+            <PropertyRef Name="Modelo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="DescripcionId" />
+          </Key>
+          <Property Name="Marca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Submarca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Modelo" Type="smallint" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DescripcionId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModeloSubMarca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubMarca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Descripcion_Descripcion">
+          <End Role="ModeloSubMarca" Type="Self.ModeloSubMarca" Multiplicity="1" />
+          <End Role="Descripcion" Type="Self.Descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeloSubMarca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Descripcion">
+              <PropertyRef Name="IdModeloSubMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descripcion_Marca">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Descripcion" Type="Self.Descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Descripcion">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descripcion_SubMarca">
+          <End Role="SubMarca" Type="Self.SubMarca" Multiplicity="1" />
+          <End Role="Descripcion" Type="Self.Descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubMarca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Descripcion">
+              <PropertyRef Name="IdSubMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spGetDescripcion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="piMarca" Type="int" Mode="In" />
+          <Parameter Name="piSubMarca" Type="int" Mode="In" />
+          <Parameter Name="piModeloSubMarca" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetModeloSubMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="piSubMarca" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetSubMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="piMarca" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="AutosBDModelStoreContainer">
+          <EntitySet Name="Descripcion" EntityType="Self.Descripcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModeloSubMarca" EntityType="Self.ModeloSubMarca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubMarca" EntityType="Self.SubMarca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaDeAutos" EntityType="Self.ListaDeAutos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListaDeAutos].[Marca] AS [Marca], 
+    [ListaDeAutos].[Submarca] AS [Submarca], 
+    [ListaDeAutos].[Modelo] AS [Modelo], 
+    [ListaDeAutos].[Descripcion] AS [Descripcion], 
+    [ListaDeAutos].[DescripcionId] AS [DescripcionId]
+    FROM [dbo].[ListaDeAutos] AS [ListaDeAutos]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Descripcion_Descripcion" Association="Self.FK_Descripcion_Descripcion">
+            <End Role="ModeloSubMarca" EntitySet="ModeloSubMarca" />
+            <End Role="Descripcion" EntitySet="Descripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descripcion_Marca" Association="Self.FK_Descripcion_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Descripcion" EntitySet="Descripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descripcion_SubMarca" Association="Self.FK_Descripcion_SubMarca">
+            <End Role="SubMarca" EntitySet="SubMarca" />
+            <End Role="Descripcion" EntitySet="Descripcion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AutosBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Descripcion">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DescripcionId" />
+            <PropertyRef Name="Descripcion1" />
+            <PropertyRef Name="IdModeloSubMarca" />
+            <PropertyRef Name="IdSubMarca" />
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdModeloSubMarca" Type="Int32" Nullable="false" />
+          <Property Name="IdSubMarca" Type="Int32" Nullable="false" />
+          <Property Name="IdMarca" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModeloSubMarca" Relationship="AutosBDModel.FK_Descripcion_Descripcion" FromRole="Descripcion" ToRole="ModeloSubMarca" />
+          <NavigationProperty Name="Marca" Relationship="AutosBDModel.FK_Descripcion_Marca" FromRole="Descripcion" ToRole="Marca" />
+          <NavigationProperty Name="SubMarca" Relationship="AutosBDModel.FK_Descripcion_SubMarca" FromRole="Descripcion" ToRole="SubMarca" />
+        </EntityType>
+        <EntityType Name="ListaDeAutos">
+          <Key>
+            <PropertyRef Name="Marca" />
+            <PropertyRef Name="Submarca" />
+            <PropertyRef Name="Modelo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="DescripcionId" />
+          </Key>
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Submarca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Modelo" Type="Int16" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescripcionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Descripcion1" Relationship="AutosBDModel.FK_Descripcion_Marca" FromRole="Marca" ToRole="Descripcion" />
+        </EntityType>
+        <EntityType Name="ModeloSubMarca">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Descripcion1" Relationship="AutosBDModel.FK_Descripcion_Descripcion" FromRole="ModeloSubMarca" ToRole="Descripcion" />
+        </EntityType>
+        <EntityType Name="SubMarca">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Descripcion1" Relationship="AutosBDModel.FK_Descripcion_SubMarca" FromRole="SubMarca" ToRole="Descripcion" />
+        </EntityType>
+        <EntityContainer Name="AutosBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Descripcion" EntityType="Self.Descripcion" />
+          <EntitySet Name="ListaDeAutos" EntityType="Self.ListaDeAutos" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="ModeloSubMarca" EntityType="Self.ModeloSubMarca" />
+          <EntitySet Name="SubMarca" EntityType="Self.SubMarca" />
+          <FunctionImport Name="spGetDescripcion" ReturnType="Collection(AutosBDModel.spGetDescripcion_Result)">
+            <Parameter Name="piMarca" Mode="In" Type="Int32" />
+            <Parameter Name="piSubMarca" Mode="In" Type="Int32" />
+            <Parameter Name="piModeloSubMarca" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetMarca" ReturnType="Collection(AutosBDModel.spGetMarca_Result)" />
+          <FunctionImport Name="spGetModeloSubMarca">
+          <Parameter Name="piSubMarca" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetSubMarca">
+          <Parameter Name="piMarca" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Descripcion_Descripcion" Association="AutosBDModel.FK_Descripcion_Descripcion">
+            <End Role="ModeloSubMarca" EntitySet="ModeloSubMarca" />
+            <End Role="Descripcion" EntitySet="Descripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descripcion_Marca" Association="AutosBDModel.FK_Descripcion_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Descripcion" EntitySet="Descripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descripcion_SubMarca" Association="AutosBDModel.FK_Descripcion_SubMarca">
+            <End Role="SubMarca" EntitySet="SubMarca" />
+            <End Role="Descripcion" EntitySet="Descripcion" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="spGetDescripcion_Result">
+          <Property Type="String" Name="DescripcionId" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spGetMarca_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK_Descripcion_Descripcion">
+          <End Type="AutosBDModel.ModeloSubMarca" Role="ModeloSubMarca" Multiplicity="1" />
+          <End Type="AutosBDModel.Descripcion" Role="Descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeloSubMarca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Descripcion">
+              <PropertyRef Name="IdModeloSubMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descripcion_Marca">
+          <End Type="AutosBDModel.Marca" Role="Marca" Multiplicity="1" />
+          <End Type="AutosBDModel.Descripcion" Role="Descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Descripcion">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descripcion_SubMarca">
+          <End Type="AutosBDModel.SubMarca" Role="SubMarca" Multiplicity="1" />
+          <End Type="AutosBDModel.Descripcion" Role="Descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubMarca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Descripcion">
+              <PropertyRef Name="IdSubMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AutosBDModelStoreContainer" CdmEntityContainer="AutosBDEntities">
+          <EntitySetMapping Name="Descripcion">
+            <EntityTypeMapping TypeName="AutosBDModel.Descripcion">
+              <MappingFragment StoreEntitySet="Descripcion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DescripcionId" ColumnName="DescripcionId" />
+                <ScalarProperty Name="Descripcion1" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdModeloSubMarca" ColumnName="IdModeloSubMarca" />
+                <ScalarProperty Name="IdSubMarca" ColumnName="IdSubMarca" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaDeAutos">
+            <EntityTypeMapping TypeName="AutosBDModel.ListaDeAutos">
+              <MappingFragment StoreEntitySet="ListaDeAutos">
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Submarca" ColumnName="Submarca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionId" ColumnName="DescripcionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="AutosBDModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModeloSubMarca">
+            <EntityTypeMapping TypeName="AutosBDModel.ModeloSubMarca">
+              <MappingFragment StoreEntitySet="ModeloSubMarca">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubMarca">
+            <EntityTypeMapping TypeName="AutosBDModel.SubMarca">
+              <MappingFragment StoreEntitySet="SubMarca">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetDescripcion" FunctionName="AutosBDModel.Store.spGetDescripcion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AutosBDModel.spGetDescripcion_Result">
+                <ScalarProperty Name="DescripcionId" ColumnName="DescripcionId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetMarca" FunctionName="AutosBDModel.Store.spGetMarca">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AutosBDModel.spGetMarca_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetModeloSubMarca" FunctionName="AutosBDModel.Store.spGetModeloSubMarca" />
+          <FunctionImportMapping FunctionImportName="spGetSubMarca" FunctionName="AutosBDModel.Store.spGetSubMarca" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
