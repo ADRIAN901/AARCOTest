@@ -9,10 +9,10 @@ GO
 CREATE PROCEDURE spGetModeloSubMarca(@piSubMarca AS INT)
 AS
 BEGIN
-	SELECT [Id], MSM.[Descripcion] FROM ModeloSubMarca MSM WITH(NOLOCK)
-	INNER JOIN Descripcion D WITH(NOLOCK) ON D.IdModeloSubMarca = MSM.Id
+	SELECT MSM.[IdModeloSubMarca], MSM.[Descripcion] FROM ModeloSubMarca MSM WITH(NOLOCK)
+	INNER JOIN Descripcion D WITH(NOLOCK) ON D.IdModeloSubMarca = MSM.IdModeloSubMarca
 	WHERE D.IdSubMarca = @piSubMarca
-	GROUP BY [Id], MSM.[Descripcion]
+	GROUP BY MSM.[IdModeloSubMarca], MSM.[Descripcion]
 END
 
 --EXEC spGetModeloSubMarca 401

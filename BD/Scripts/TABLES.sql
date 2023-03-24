@@ -8,7 +8,7 @@ BEGIN
 END
 GO
 CREATE TABLE Marca(
-	[Id] [int] IDENTITY(1, 1) NOT NULL,
+	[IdMarca] [int] IDENTITY(1, 1) NOT NULL,
 	[Descripcion][varchar](MAX) NOT NULL
 ) ON [PRIMARY]
 GO
@@ -20,7 +20,7 @@ BEGIN
 END
 GO
 CREATE TABLE SubMarca(
-	[Id] [int] IDENTITY(1, 1) NOT NULL,
+	[IdSubMarca] [int] IDENTITY(1, 1) NOT NULL,
 	[Descripcion][varchar](MAX) NOT NULL
 ) ON [PRIMARY]
 GO
@@ -32,7 +32,7 @@ BEGIN
 END
 GO
 CREATE TABLE ModeloSubMarca(
-	[Id] [int] IDENTITY(1, 1) NOT NULL,
+	[IdModeloSubMarca] [int] IDENTITY(1, 1) NOT NULL,
 	[Descripcion][varchar](MAX) NOT NULL
 ) ON [PRIMARY]
 GO
@@ -75,7 +75,7 @@ INSERT INTO Descripcion(
 	[IdModeloSubMarca],
 	[IdSubMarca],
 	[IdMarca])
-SELECT LDA.DescripcionId, LDA.Descripcion, MSM.Id, SM.Id, M.Id FROM [dbo].[ListaDeAutos] LDA
+SELECT LDA.DescripcionId, LDA.Descripcion, MSM.IdModeloSubMarca, SM.IdSubMarca, M.IdMarca FROM [dbo].[ListaDeAutos] LDA
 INNER JOIN ModeloSubMarca MSM ON LDA.Modelo = MSM.Descripcion
 INNER JOIN SubMarca SM ON LDA.SubMarca = SM.Descripcion
 INNER JOIN Marca M ON LDA.Marca = M.Descripcion

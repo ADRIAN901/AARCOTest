@@ -4,7 +4,6 @@ using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication.model;
-using System.Text;
 
 namespace WebApplication
 {
@@ -41,7 +40,7 @@ namespace WebApplication
             else
             {
                 string DescipcionId= ddlDescripcion.SelectedValue;
-                consultar_cotizacion("bd8e92d6-715b-4551-8ff2-fbdb69a56cc2");
+                consultar_cotizacion("97dbc536-58db-4749-ba20-ad22d37348e7");
             }
         }
 
@@ -103,11 +102,11 @@ namespace WebApplication
 
 
                 //LLENAMOS INFORMACION
-                lblAxa.Text = peticion_Cotizacion.aseguradoras[0].Tarifa.ToString("$#.00");
-                lblZurich.Text = peticion_Cotizacion.aseguradoras[1].Tarifa.ToString("$#.00");
-                lblHdi.Text = peticion_Cotizacion.aseguradoras[2].Tarifa.ToString("$#.00");
-                lblChubb.Text = peticion_Cotizacion.aseguradoras[3].Tarifa.ToString("$#.00");
-                lblQualitas.Text = peticion_Cotizacion.aseguradoras[4].Tarifa.ToString("$#.00");
+                lblAxa.Text = peticion_Cotizacion.aseguradoras[0].Tarifa.ToString("#.00");
+                lblZurich.Text = peticion_Cotizacion.aseguradoras[1].Tarifa.ToString("#.00");
+                lblHdi.Text = peticion_Cotizacion.aseguradoras[2].Tarifa.ToString("#.00");
+                lblChubb.Text = peticion_Cotizacion.aseguradoras[3].Tarifa.ToString("#.00");
+                lblQualitas.Text = peticion_Cotizacion.aseguradoras[4].Tarifa.ToString("#.00");
 
 
             }
@@ -128,10 +127,9 @@ namespace WebApplication
                 var body = @"{""DescripcionId"":""" + DescripcionId + '"' + "}";
                 request.AddParameter("application/json", body, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
+                Console.WriteLine(response.Content);
 
-                string cadena = Encoding.Default.GetString(new byte[] { 34 });
-
-                peticion_llave = response.Content.ToString().Replace(cadena, "");
+                peticion_llave = response.Content.ToString();
             }
             catch { }
 

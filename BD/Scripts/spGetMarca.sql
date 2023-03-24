@@ -9,7 +9,7 @@ GO
 CREATE PROCEDURE spGetMarca
 AS
 BEGIN
-	SELECT [Id], [Descripcion] FROM Marca WITH(NOLOCK)
+	SELECT [IdMarca], [Descripcion] FROM Marca WITH(NOLOCK)
 END
 
 --EXEC spGetMarca
