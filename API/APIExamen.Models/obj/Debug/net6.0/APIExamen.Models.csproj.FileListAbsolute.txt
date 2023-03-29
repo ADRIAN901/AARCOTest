@@ -1,0 +1,12 @@
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\bin\Debug\net6.0\APIExamen.Models.deps.json
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\bin\Debug\net6.0\APIExamen.Models.dll
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\bin\Debug\net6.0\APIExamen.Models.pdb
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.csproj.AssemblyReference.cache
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.AssemblyInfoInputs.cache
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.AssemblyInfo.cs
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.csproj.CoreCompileInputs.cache
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.dll
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\refint\APIExamen.Models.dll
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\APIExamen.Models.pdb
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\APIExamen.Models\obj\Debug\net6.0\ref\APIExamen.Models.dll

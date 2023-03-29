@@ -195,7 +195,7 @@ C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\bin\System.Security.Cryptog
 C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\bin\System.Security.Cryptography.Primitives.dll
 C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\bin\System.Security.Cryptography.X509Certificates.dll
 C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\obj\Debug\Cotizador.csprojAssemblyReference.cache
+C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\obj\Debug\Cotizador.csproj.AssemblyReference.cache
 C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\obj\Debug\Cotizador.csproj.CoreCompileInputs.cache
 C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\obj\Debug\Cotizador.csproj.CopyComplete
 C:\ARA\Proyectos\Apoyo\AARCO\AARCOTest\API\Cotizador\obj\Debug\Cotizador.dll

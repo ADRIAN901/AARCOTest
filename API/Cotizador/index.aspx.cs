@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using WebApplication.model;
 using System.Text;
 using System.Collections.Generic;
+using System.IO;
 
 namespace WebApplication
 {
@@ -25,15 +26,19 @@ namespace WebApplication
         private void loadMarca()
         {
             //CONSUME API
-            var client = new RestClient("http://localhost:56887/GetMarca");
+            //var client = new RestClient("http://localhost:56887/GetMarca");
+            var client = new RestClient("https://localhost:7029/api/Autos/GetMarca");
             client.Timeout = -1;
             client.FollowRedirects = false;
             var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
+            var response = client.Execute(request);
 
-            List<DescripcionBase> respuesta = JsonConvert.DeserializeObject<List<DescripcionBase>>(response.Content.ToString());
-            foreach (var item in respuesta)
-                ddlMarca.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Descripcion });
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                List<DescripcionBase> respuesta = JsonConvert.DeserializeObject<List<DescripcionBase>>(response.Content);
+                foreach (var item in respuesta)
+                    ddlMarca.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Descripcion });
+            }
 
             ddlMarca.SelectedIndex = -1;
         }
@@ -162,15 +167,19 @@ namespace WebApplication
             ddlSubmarca.Items.Clear();
             idMarca = ddlMarca.SelectedValue;
             //CONSUME API
-            var client = new RestClient("http://localhost:56887/GetSubMarca/" + idMarca);
+            //var client = new RestClient("http://localhost:56887/GetSubMarca/" + idMarca);
+            var client = new RestClient("https://localhost:7029/api/Autos/GetSubMarca/" + idMarca);
             client.Timeout = -1;
             client.FollowRedirects = false;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
 
-            List<DescripcionBase> respuesta = JsonConvert.DeserializeObject<List<DescripcionBase>>(response.Content.ToString());
-            foreach (var item in respuesta)
-                ddlSubmarca.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Descripcion });
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                List<DescripcionBase> respuesta = JsonConvert.DeserializeObject<List<DescripcionBase>>(response.Content);
+                foreach (var item in respuesta)
+                    ddlSubmarca.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Descripcion });
+            }
         }
 
         protected void ddlSubmarca_SelectedIndexChanged(object sender, EventArgs e)
@@ -178,15 +187,20 @@ namespace WebApplication
             ddlModelo.Items.Clear();
             idSubMarca = ddlSubmarca.SelectedValue;
             //CONSUME API
-            var client = new RestClient("http://localhost:56887/GetModeloSubMarca/" + idSubMarca);
+            //var client = new RestClient("http://localhost:56887/GetModeloSubMarca/" + idSubMarca);
+            var client = new RestClient("https://localhost:7029/api/Autos/GetModeloSubMarca/" + idSubMarca);
+
             client.Timeout = -1;
             client.FollowRedirects = false;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
 
-            List<DescripcionBase> respuesta = JsonConvert.DeserializeObject<List<DescripcionBase>>(response.Content.ToString());
-            foreach (var item in respuesta)
-                ddlModelo.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Descripcion });
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                List<DescripcionBase> respuesta = JsonConvert.DeserializeObject<List<DescripcionBase>>(response.Content);
+                foreach (var item in respuesta)
+                    ddlModelo.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Descripcion });
+            }
         }
 
         protected void ddlModelo_SelectedIndexChanged(object sender, EventArgs e)
@@ -198,15 +212,19 @@ namespace WebApplication
             idModeloSubMarca = ddlModelo.SelectedValue;
             
             //CONSUME API
-            var client = new RestClient("http://localhost:56887/GetDescripcion/" + idMarca + "/" + idSubMarca + "/" + idModeloSubMarca);
+            //var client = new RestClient("http://localhost:56887/GetDescripcion/" + idMarca + "/" + idSubMarca + "/" + idModeloSubMarca);
+            var client = new RestClient("https://localhost:7029/api/Autos/GetDescripcion/" + idMarca + "/" + idSubMarca + "/" + idModeloSubMarca);
             client.Timeout = -1;
             client.FollowRedirects = false;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
 
-            List<DescripcionModel> respuesta = JsonConvert.DeserializeObject<List<DescripcionModel>>(response.Content.ToString());
-            foreach (var item in respuesta)
-                ddlDescripcion.Items.Add(new ListItem { Value = item.DescripcionId.ToString(), Text = item.Descripcion });
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                List<DescripcionModel> respuesta = JsonConvert.DeserializeObject<List<DescripcionModel>>(response.Content);
+                foreach (var item in respuesta)
+                    ddlDescripcion.Items.Add(new ListItem { Value = item.DescripcionId.ToString(), Text = item.Descripcion });
+            }
         }
     }
 }
